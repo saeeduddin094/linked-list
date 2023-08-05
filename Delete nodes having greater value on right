@@ -1,0 +1,52 @@
+class Solution
+{
+    public:
+    void print(Node* head)
+    {
+        while(head!=NULL)
+        {
+            cout<<head->data<<" ";
+            head=head->next;
+        }
+        cout<<endl;
+    }
+    Node *compute(Node *head)
+    {
+        if(head->next==NULL)
+        {
+            return head;
+        }
+        Node* root=head->next;
+        Node* curr=head;
+        while(root!=NULL)
+        {
+            if(root->data > head->data && root->data > curr->data)
+            {
+                head=root;
+                curr=root;
+            }
+            else if(root->data <= head->data && root->data <= curr->data)
+            {
+                curr->next=root;
+                curr=root;
+            }
+            else if(root->data<=head->data && root->data >= curr->data)
+            {
+                // head->next=root;
+                Node* check=head;
+                Node* pre=NULL;
+                while(check->data >= root->data)
+                {
+                    pre=check;
+                    check=check->next;
+                }
+                pre->next=root;
+                curr=root;
+            }
+            root=root->next;
+            // print(head);
+        }
+        curr->next=NULL;
+        return head;
+    }
+    
