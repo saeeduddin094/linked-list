@@ -1,0 +1,44 @@
+    public:
+    //Function to sort a linked list of 0s, 1s and 2s.
+    Node* segregate(Node *head) {
+        Node* zero=new Node(-1);
+        Node* zero_head=zero;
+        
+        Node* first=new Node(-1);
+        Node* first_head=first;
+        Node* second=new Node(-1);
+        Node* second_head=second;
+        Node* root=head;
+        while(root!=NULL)
+        {
+            if(root->data==0)
+            {
+                Node* temp=new Node(root->data);
+                zero->next=temp;
+                zero=temp;
+            }
+            else if(root->data==1)
+            {
+                Node* temp=new Node(root->data);
+                first->next=temp;
+                first=temp;
+            }
+            else
+            {
+                Node* temp=new Node(root->data);
+                second->next=temp;
+                second=temp;
+            }
+            root=root->next;
+        }
+        if(first_head->next==NULL)
+        {
+            zero->next=second_head->next;
+            return zero_head->next;
+        }
+        zero->next=first_head->next;
+        first->next=second_head->next;
+        second->next==NULL;
+        return zero_head->next;
+        
+    }
